@@ -9,4 +9,6 @@ interface ProductRepository
     public function save(Product $product): boolean;
 
     public function findByName(Text $name): ?Product;
+
+    public function find(Uuid $uuid): ?Product;
 }

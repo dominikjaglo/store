@@ -6,5 +6,5 @@ namespace App\Store\Application\Query;
 
 interface FindProductInterface
 {
-    public function find(Text $name): ?Product;
+    public function find(string $uuid): ?Product
 }

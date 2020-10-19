@@ -50,14 +50,14 @@ class ProductController extends Controller
 
         return response()
             ->withHeaders([
-                'Location' => "/products/{$product->getName()->toString()}"
+                'Location' => "/products/{$product->getUuid()->toString()}"
             ])
             ->json([], 201);
     }
 
-    public function get(string $name, Request $request): Response
+    public function get(string $uuid, Request $request): Response
     {
-        $product = $this->findProductQuery->find(Text::create($name));
+        $product = $this->findProductQuery->find($uuid);
         if ($product) {
             $mappedProduct = $this->productMapper->toArray($product)
             return response()->json($mappedProduct, 200);

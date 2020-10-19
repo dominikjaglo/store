@@ -11,8 +11,8 @@ class FindProduct implements FindProductInterface
         $this->productRepository = $productRepository;
     }
 
-    public function find(Text $name): ?Product
+    public function find(string $uuid): ?Product
     {
-        return $this->productRepository->findByName($name);
+        return $this->productRepository->find(Uuid::fromString($uuid));
     }
 }

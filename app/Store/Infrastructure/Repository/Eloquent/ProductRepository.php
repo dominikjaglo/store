@@ -22,9 +22,21 @@ class ProductRepository implements ProductRepositoryInterface
         $this->mapper = $mapper;
     }
 
+    public function find(Uuid $uuid): ?Product;
+    {
+        $eloquentModel = $this->model::where('uuid', '=', $uuid->toString());
+        if (null === $eloquentModel) {
+            return null;
+        }
+
+        $product = $this->mapper->toDomainModel($eloquentModel);
+
+        return $product;
+    }
+
     public function findByName(Text $name): ?Product
     {
-        $eloquentModel = $this->model::find($name->toString());
+        $eloquentModel = $this->model::where('name', '=', $name->toString());
         if (null === $eloquentModel) {
             return null;
         }
